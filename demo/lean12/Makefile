@@ -107,6 +107,8 @@ kvmtest: release KVMRUN
 
 vboxtest: release VBOXRUN
 
+build_tool: 
+	gcc ./script/lmkfbuild.c -o ./build/lmkfbuild
 
 createimg:
 	$(DD) bs=512 if=/dev/zero of=$(DSKIMG) count=$(IMGSECTNR)
