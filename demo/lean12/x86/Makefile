@@ -11,3 +11,5 @@ all: pretreatment
 	cd pretreatment && $(MAKE) -f ./Makefile
 	@echo '*********x86编译构建系统结束*************'
 
+clean:
+	cd pretreatment && $(MAKE) clean

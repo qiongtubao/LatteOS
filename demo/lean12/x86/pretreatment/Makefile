@@ -25,10 +25,8 @@ CCBUILDPATH	= $(KERNELCE_PATH)
 LMKFBUID = ./lmkfbuild
 CPPFLGSLDS	= $(HEADFILE_PATH) -E -P 
 
-PREMENTMKI_OBJS = krnlobjs.mki 
-# cosmoslink.lds krnlbuidcmd.mki krnlbuidrule.mki hal.mki krl.mki drv.mki lib.mki task.mki link.mki
-PREMENTMK_OBJS = krnlobjs.mk 
-# krnlbuidcmd.mk krnlbuidrule.mk hal.mk krl.mk drv.mk lib.mk task.mk link.mk
+PREMENTMKI_OBJS = krnlobjs.mki cosmoslink.lds krnlbuidcmd.mki krnlbuidrule.mki hal.mki krl.mki drv.mki drv.mki lib.mki task.mki link.mki
+PREMENTMK_OBJS = krnlobjs.mk  krnlbuidcmd.mk krnlbuidrule.mk hal.mk krl.mk drv.mk lib.mk task.mk link.mk
 # .PHONY : all everything everymk build_kernel
 # all: build_kernel
 
@@ -54,3 +52,8 @@ everymk : $(PREMENTMK_OBJS)
 %.mk : %.mki
 	$(LMKFBUID) -i $< -o $@
 	$(PRINTCSTRLMK)
+
+RM = rm
+
+clean:
+	$(RM) -f *.mk *.mki
