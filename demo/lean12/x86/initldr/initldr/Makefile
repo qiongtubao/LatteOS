@@ -70,29 +70,31 @@ everything : $(INITLDRIMH_OBJS) $(INITLDRKRL_OBJS) $(INITLDRSVE_OBJS)
 CCSTR		= 	'CC -[M] 正在构建... '$<
 PRINTCSTR 	=	@echo $(CCSTR) 
 
+RELEASE_PATH = ../../release/
+
 %.o : $(CCBUILDPATH)%.asm
-	$(ASM) $(ASMBFLAGS) -o $@ $<
+	$(ASM) $(ASMBFLAGS) -o $(RELEASE_PATH)$@ $<
 	@echo 'AS -[M] 正在构建...' $<
 	
 %.o : $(CCBUILDPATH)%.c
-	$(CC) $(BTCFLAGS) -o $@ $<
+	$(CC) $(BTCFLAGS) -o $(RELEASE_PATH)$@ $<
 	$(PRINTCSTR) 
 
 %.lds : $(CCBUILDPATH)%.S
-	$(CC) $(CPPFLGSLDS) -o $@ $<
+	$(CC) $(CPPFLGSLDS) -o $(RELEASE_PATH)$@ $<
 	$(PRINTCSTR)
 
 %.mh : $(CCBUILDPATH)%.S
-	$(CC) $(CPPFLGSLDS) -o $@ $<
+	$(CC) $(CPPFLGSLDS) -o $(RELEASE_PATH)$@ $<
 	$(PRINTCSTR)
 
 %.lib : $(CCBUILDPATH)%.c
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $(RELEASE_PATH)$@ $<
 	$(PRINTCSTR)
 
 %.lib : $(CCBUILDPATH)%.asm
-	$(ASM) $(ASMKFLAGS) -o $@ $<
+	$(ASM) $(ASMKFLAGS) -o $(RELEASE_PATH)$@ $<
 	@echo 'AS -[M] 正在构建...' $< 
 
 clean:
-	$(RM) -f *.o
+	$(RM) -f $(RELEASE_PATH)*.o
