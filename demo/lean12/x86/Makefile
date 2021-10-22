@@ -10,6 +10,11 @@ buildMakefile:
 all: clean mkdir_release buildMakefile 
 	cd initldr && $(MAKE) -f ./Makefile
 	$(MAKE) -C release -f hal.mk 
+	$(MAKE) -C release -f krl.mk
+	$(MAKE) -C release -f drv.mk
+	$(MAKE) -C release -f lib.mk
+	$(MAKE) -C release -f task.mk
+	$(MAKE) -C release -f link.mk
 	@echo '*********x86编译构建系统结束*************'
 
 RELEASE_PATH = ./release

@@ -18,6 +18,7 @@ everymk : $(PREMENTMK_OBJS)
 clean:
 	$(RM) -f *.mki
 
+BUILDPATH = ../../release/
 
 %.lds : $(CCBUILDPATH)%.S
 	$(CC) $(CPPFLGSLDS) -o $(BUILDPATH)$@ $<
@@ -26,8 +27,6 @@ clean:
 %.mkh : $(CCBUILDPATH)%.S
 	$(CC) $(CPPFLGSLDS) -o $(BUILDPATH)$@ $<
 	$(PRINTCSTR)
-
-BUILDPATH = ../../release/
 
 %.mki : $(CCBUILDPATH)%.S
 	$(CC) $(CPPFLGSLDS) -o $(BUILDPATH)$@ $<

@@ -9,13 +9,13 @@ all: clean build
 clean:
 	$(RM) -f lmkfbuild
 
-build: build_tool buildPrementMk buildPrementMki
+build: build_tool buildMk buildPrementMki
 	@echo build
 	
 build_tool:
 	gcc ./lmkfbuild.c -o ./lmkfbuild
 
-buildPrementMk:
+buildMk:
 	cd build_prement_mk && $(MAKE) -f ./Makefile 
 	@echo build_prement_mk
 	
