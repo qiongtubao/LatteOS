@@ -32,7 +32,7 @@ RELEASE_PATH = ../../release/
 INITLDR_DIR := $(RELEASE_PATH)
 INITLDRIMH_OBJS :=
 INITLDRIMH_LINK :=
-INITLDRIMH_OBJS += $(INITLDR_DIR)/imginithead.o $(INITLDR_DIR)/inithead.o $(INITLDR_DIR)/vgastr.o
+INITLDRIMH_OBJS += $(INITLDR_DIR)imginithead.o $(INITLDR_DIR)inithead.o $(INITLDR_DIR)vgastr.o
 INITLDRIMH_LINK += $(INITLDRIMH_OBJS)
 INITLDRIMH_ELF = initldrimh.elf
 INITLDRIMH = initldrimh.bin
@@ -70,7 +70,7 @@ $(INITLDRSVE_ELF): $(INITLDRSVE_LINK)
 	$(LD) $(LDRSVELDFLAGS) -o $@ $(INITLDRSVE_LINK)
 
 $(INITLDRIMH): $(INITLDRIMH_ELF)
-	$(OBJCOPY) $(OJCYFLAGS) $< $@
+	$(OBJCOPY) $(OJCYFLAGS) $< $(RELEASE_PATH)$@
 	@echo 'OBJCOPY -[M] 正在构建...' $@  
 
 $(INITLDRKRL):$(INITLDRKRL_ELF)
@@ -82,4 +82,5 @@ $(INITLDRSVE):$(INITLDRSVE_ELF)
 	@echo 'OBJCOPY -[M] 正在构建...' $@ 
 
 clean:
+	$(RM) -f *.elf *.map *.bin
 	$(RM) -f $(RELEASE_PATH)*.elf $(RELEASE_PATH)*.map
