@@ -1,22 +1,51 @@
 /**********************************************************
-        cpu控制头文件cpuctrl_t.h
+        cpu控制头文件cpuctrl.h
 ***********************************************************
                 彭东
 **********************************************************/
-#ifndef _CPUCTRL_T_H
-#define _CPUCTRL_T_H
+#ifndef _CPUCTRL_H
+#define _CPUCTRL_H
 
-#define CPU_USR_MODE 0x10
-#define CPU_FIQ_MODE 0x11
-#define CPU_IRQ_MODE 0x12
-#define CPU_SVE_MODE 0x13
-#define CPU_ABT_MODE 0x17
-#define CPU_UND_MODE 0x1b
-#define CPU_SYS_MODE 0x1f
-
-#define CFIQ 0x40
-#define CIRQ 0x80
-#define CIRQFIQ 0xc0
-
-
-#endif // CPUCTRL_T_H
+void hal_disable_fiq();
+void hal_enable_fiq();
+void hal_disable_irq();
+void hal_enable_irq();
+void hal_disable_irqfiq();
+void hal_enable_irqfiq();
+void hal_disablefiq_savecpuflg(cpuflg_t* cpuflg);
+void hal_enablefiq_restcpuflg(cpuflg_t* cpuflg);
+void hal_disableirq_savecpuflg(cpuflg_t* cpuflg);
+void hal_enableirq_restcpuflg(cpuflg_t* cpuflg);
+void hal_disableirqfiq_savecpuflg(cpuflg_t* cpuflg);
+void hal_enableirqfiq_restcpuflg(cpuflg_t* cpuflg);
+u32_t hal_read_currmodesp();
+cpuflg_t hal_read_cpuflg();
+void hal_write_cpuflg(cpuflg_t cpuflg);
+uint_t hal_read_ipsr();
+void hal_swhmodset_sp_rscurmod(uint_t cpumod,reg_t sp);
+cpuflg_t hal_read_scpuflg();
+void hal_write_scpuflg(cpuflg_t scpuflg);
+void hal_cpumode_switch(uint_t mode);
+uint_t hal_cpumodeswitch_retoldmode(uint_t mode);
+u8_t hal_io8_read(uint_t ioadr);
+u16_t hal_io16_read(uint_t ioadr);
+u32_t hal_io32_read(uint_t ioadr);
+void hal_io8_write(uint_t ioadr,u8_t val);
+void hal_io16_write(uint_t ioadr,u16_t val);
+void hal_io32_write(uint_t ioadr,u32_t val);
+void hal_spinlock_init(spinlock_t* lock);
+void hal_spinlock_lock(spinlock_t* lock);
+void hal_spinlock_unlock(spinlock_t* lock);
+void hal_spinlock_saveflg_cli(spinlock_t* lock, cpuflg_t* cpuflg);
+void hal_spinunlock_restflg_sti(spinlock_t* lock, cpuflg_t* cpuflg);
+void knl_spinlock_init(spinlock_t* lock);
+void knl_spinlock_lock(spinlock_t* lock);
+void knl_spinlock_unlock(spinlock_t* lock);
+void knl_spinlock_cli(spinlock_t* lock, cpuflg_t* cpuflg);
+void knl_spinunlock_sti(spinlock_t* lock, cpuflg_t* cpuflg);
+void hal_memset(void* setp,size_t n,u8_t setval);
+void hal_memcpy(void* src,void* dst,size_t n);
+void hal_sysdie(char_t* errmsg);
+void system_error(char_t* errmsg);
+uint_t hal_retn_cpuid();
+#endif // CPUCTRL_H
