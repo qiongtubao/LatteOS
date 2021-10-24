@@ -17,6 +17,7 @@ all: clean mkdir_release buildMakefile
 	$(MAKE) -C release -f task.mk
 	$(MAKE) -C release -f link.mk
 	$(BUILD_TOOLS_PATH)lmoskrlimg -m k -lhf $(RELEASE_PATH)initldrimh.bin -o $(RELEASE_PATH)Cosmos.eki -f $(RELEASE_PATH)initldrsve.bin $(RELEASE_PATH)initldrkrl.bin $(RELEASE_PATH)Cosmos.bin $(BUILD_TOOLS_PATH)font.fnt $(BUILD_TOOLS_PATH)logo.bmp $(BUILD_TOOLS_PATH)background.bmp
+	cd vbox && $(MAKE) -f ./Makefile
 	@echo '*********x86编译构建系统结束*************'
 
 RELEASE_PATH = ./release/
@@ -27,4 +28,4 @@ mkdir_release:
 clean:
 	rm -rf $(RELEASE_PATH) 
 	cd build_makefile && $(MAKE) clean
-	
+
