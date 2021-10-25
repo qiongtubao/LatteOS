@@ -24,12 +24,16 @@ hd_img:
 # sudo grub-install --boot-directory=./hdisk/boot/ --force --allow-floppy /dev/loop0
 # ；--boot-directory 指向先前我们在虚拟硬盘中建立的boot目录。
 # ；--force --allow-floppy ：指向我们的虚拟硬盘设备文件/dev/loop0
+
+
+# sudo cp /home/dong/Documents/learn/cosmos-master/lesson13/Cosmos/release/Cosmos.eki ./hdisk/boot/
+# sudo cp ../release/Cosmos.eki ./hdisk/boot/
+#sudo cp /home/dong/Documents/learn/cosmos-master/lesson13/Cosmos/Cosmos.eki ./hdisk/boot/
 moutraw:
 	sudo mount -o loop ./hd.img ./hdisk/
 	sudo mkdir ./hdisk/boot/
 	sudo grub-install --boot-directory=./hdisk/boot/ --force --allow-floppy /dev/loop8 --target=i386-pc
 	sudo cp ./grub.cfg ./hdisk/boot/grub/grub.cfg
-# sudo cp /home/dong/Documents/learn/cosmos-master/lesson13/Cosmos/release/Cosmos.eki ./hdisk/boot/
 	sudo cp ../release/Cosmos.eki ./hdisk/boot/
 	sudo umount ./hdisk/
 	echo 'add Cosmos.eki'
@@ -56,3 +60,4 @@ moutvmhd:
 	VBoxManage closemedium disk ./hd.vdi
 	VBoxManage storageattach Cosmos --storagectl "IDE" --port 0 --device 0 --type hdd --medium ./hd.vdi
 	echo 'mountvmhd'
+

@@ -28,3 +28,5 @@ VBoxManage storagectl Cosmos --name "SATA" --add sata --controller IntelAhci --p
 VBoxManage closemedium disk ./hd.vdi #删除虚拟硬盘UUID并重新分配
 #将虚拟硬盘挂到虚拟机的硬盘控制器
 VBoxManage storageattach HelloOS --storagectl "SATA" --port 1 --device 0 --type hdd --medium ./hd.vdi
+
+
